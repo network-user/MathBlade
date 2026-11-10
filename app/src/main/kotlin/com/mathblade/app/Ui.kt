@@ -37,6 +37,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+private val CardSurface = Color(0xFF1E1A14)
+private val CardInk = Color(0xFFF2EAD8)
+
+@Composable
+fun gameCardColors() = CardDefaults.cardColors(
+    containerColor = CardSurface,
+    contentColor = CardInk
+)
+
 /**
  * Full-screen background picture (bg_* are opaque RGB images, shown
  * full-screen as intended). A dark scrim keeps text readable.
@@ -64,7 +73,7 @@ fun FramedImage(
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1A14))
+        colors = gameCardColors()
     ) {
         Box(
             modifier = Modifier
@@ -131,7 +140,8 @@ fun HpBar(current: Int, max: Int, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = stringResource(R.string.battle_enemy_hp, current, max),
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            color = GameColors.ink
         )
     }
 }
@@ -142,13 +152,15 @@ fun GoldXpRow(gold: Int, xp: Int, modifier: Modifier = Modifier) {
         Text(
             text = stringResource(R.string.common_gold, gold),
             style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = GameColors.ink
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(
             text = stringResource(R.string.common_xp, xp),
             style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = GameColors.ink
         )
     }
 }
@@ -166,7 +178,7 @@ fun MenuCard(
             .fillMaxWidth()
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1A14))
+        colors = gameCardColors()
     ) {
         Row(
             modifier = Modifier.padding(12.dp),
@@ -185,7 +197,7 @@ fun MenuCard(
                 Text(
                     text = stringResource(descRes),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = Color(0xFFA99B7E)
+                    color = GameColors.muted
                 )
             }
         }
@@ -198,6 +210,7 @@ fun SectionTitle(text: String, modifier: Modifier = Modifier) {
         text = text,
         style = MaterialTheme.typography.titleLarge,
         fontWeight = FontWeight.Bold,
+        color = GameColors.ink,
         modifier = modifier.padding(vertical = 8.dp)
     )
 }

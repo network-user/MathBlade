@@ -297,7 +297,7 @@
     <string name="strike_easy">Лёгкий</string>
     <string name="strike_medium">Средний</string>
     <string name="strike_hard">Тяжёлый</string>
-    <string name="strike_preview">База урона %1$d, на ответ около %2$d с</string>
+    <string name="strike_preview">База %1$d × школа %2$s × меч %3$s ≈ %4$d при обычной скорости</string>
     <string name="strike_change">Другой удар</string>
     <string name="strike_hint">Сначала выбери силу и школу. Пример появится после замаха.</string>
 </resources>

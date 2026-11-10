@@ -24,6 +24,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -51,7 +52,7 @@ import com.mathblade.core.Operation
 private val Ink = Color(0xFF1A1420)
 private val Paper = Color(0xFFF2EAD8)
 private val Gold = Color(0xFFE6B84A)
-private val Muted = Color(0xFFA99B7E)
+private val Muted = GameColors.muted
 
 /**
  * Shared answer area: one field, or two (quotient + remainder) for
@@ -67,6 +68,15 @@ fun AnswerFields(
     var answer by remember(problem) { mutableStateOf("") }
     var quotient by remember(problem) { mutableStateOf("") }
     var remainder by remember(problem) { mutableStateOf("") }
+    val fieldColors = OutlinedTextFieldDefaults.colors(
+        focusedTextColor = Paper,
+        unfocusedTextColor = Paper,
+        focusedLabelColor = Muted,
+        unfocusedLabelColor = Muted,
+        cursorColor = Gold,
+        focusedBorderColor = Gold,
+        unfocusedBorderColor = Muted
+    )
     Column(modifier = modifier) {
         if (problem.operation == Operation.REMAINDER) {
             Text(
@@ -81,6 +91,7 @@ fun AnswerFields(
                     onValueChange = { quotient = it },
                     label = { Text(stringResource(R.string.battle_quotient_label)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    colors = fieldColors,
                     singleLine = true,
                     modifier = Modifier.weight(1f)
                 )
@@ -89,6 +100,7 @@ fun AnswerFields(
                     onValueChange = { remainder = it },
                     label = { Text(stringResource(R.string.battle_remainder_label)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    colors = fieldColors,
                     singleLine = true,
                     modifier = Modifier.weight(1f)
                 )
@@ -99,6 +111,7 @@ fun AnswerFields(
                 onValueChange = { answer = it },
                 label = { Text(stringResource(R.string.battle_answer_label)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                colors = fieldColors,
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -286,11 +299,17 @@ fun BattleScreen(vm: GameViewModel, navController: NavController, regionId: Int)
                         )
                     }
                     Spacer(modifier = Modifier.height(8.dp))
+                    val sword = Equipment.swordById(save.equippedSword)
+                    val swordRate = sword?.effectiveMultiplier(save.forgeLevels[save.equippedSword] ?: 0) ?: 1.0
+                    val schoolRate = snap.strikeOperation.damageCoefficient()
+                    val approx = kotlin.math.round(snap.strikeDifficulty.baseDamage * schoolRate * swordRate).toInt().coerceAtLeast(1)
                     Text(
                         text = stringResource(
                             R.string.strike_preview,
                             snap.strikeDifficulty.baseDamage,
-                            snap.strikeDifficulty.normSeconds
+                            rateText(schoolRate),
+                            rateText(swordRate),
+                            approx
                         ),
                         color = Gold
                     )
@@ -379,6 +398,12 @@ fun BattleScreen(vm: GameViewModel, navController: NavController, regionId: Int)
                 ) { Text(stringResource(R.string.common_to_camp)) }
             }
     }
+}
+
+private fun rateText(value: Double): String {
+    val rounded = kotlin.math.round(value * 100.0) / 100.0
+    val text = rounded.toString()
+    return if (text.endsWith(".0")) text.dropLast(2) else text
 }
 
 @Composable

@@ -26,6 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.mathblade.core.Titles
 import com.mathblade.core.World
@@ -64,7 +65,8 @@ fun CampScreen(vm: GameViewModel, navController: NavController) {
                     R.string.camp_hero_title,
                     stringResource(titleNameRes(Titles.titleFor(save.totalDamage)))
                 ),
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleMedium,
+                color = GameColors.ink
             )
             Spacer(modifier = Modifier.height(8.dp))
             GoldXpRow(gold = save.gold, xp = save.xp)
@@ -80,7 +82,8 @@ fun CampScreen(vm: GameViewModel, navController: NavController) {
                     stringResource(questNameRes(currentQuest))
                 } else {
                     stringResource(R.string.camp_no_quest)
-                }
+                },
+                color = GameColors.ink
             )
 
             // Regions with the current quest and boss on the Gates card.
@@ -90,7 +93,7 @@ fun CampScreen(vm: GameViewModel, navController: NavController) {
                 val locked = region.id > save.unlockedRegion
                 Card(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1A14))
+                    colors = gameCardColors()
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
                         Row {
@@ -105,7 +108,8 @@ fun CampScreen(vm: GameViewModel, navController: NavController) {
                                     stringResource(R.string.camp_region_locked)
                                 } else {
                                     stringResource(R.string.camp_region_open)
-                                }
+                                },
+                                color = GameColors.ink
                             )
                         }
                         Text(
@@ -114,7 +118,8 @@ fun CampScreen(vm: GameViewModel, navController: NavController) {
                                 stringResource(monsterNameRes(region.boss.id))
                             ),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = Color(0xFFA99B7E)
+                            fontWeight = FontWeight.Bold,
+                            color = GameColors.ink
                         )
                         Text(
                             text = stringResource(
@@ -122,7 +127,9 @@ fun CampScreen(vm: GameViewModel, navController: NavController) {
                                 stringResource(difficultyNameRes(region.difficulty))
                             ),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = Color(0xFFA99B7E)
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 16.sp,
+                            color = GameColors.ink
                         )
                         if (!locked) {
                             Spacer(modifier = Modifier.height(8.dp))

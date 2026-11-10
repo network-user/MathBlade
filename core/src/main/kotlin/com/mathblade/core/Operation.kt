@@ -15,6 +15,18 @@ enum class Operation(val id: String) {
     PERCENT("percent"),
     COMBO("combo");
 
+    /**
+     * Extra damage factor for choosing this school.
+     * Addition and subtraction stay at 1. Harder schools pay more.
+     */
+    fun damageCoefficient(): Double = when (this) {
+        ADD, SUB -> 1.0
+        MUL, DIV -> 1.3
+        PERCENT, REMAINDER -> 1.5
+        POWER, SQRT -> 1.7
+        COMBO -> 2.0
+    }
+
     companion object {
         fun fromId(id: String): Operation? = entries.find { it.id == id }
     }

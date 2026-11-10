@@ -56,7 +56,8 @@ private fun ScreenColumn(titleRes: Int, onBack: () -> Unit, content: @Composable
         Text(
             text = stringResource(titleRes),
             style = MaterialTheme.typography.headlineMedium,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            color = GameColors.ink
         )
         Spacer(modifier = Modifier.height(12.dp))
         content()
@@ -81,14 +82,14 @@ fun QuestLogScreen(vm: GameViewModel, navController: NavController) {
             for (contract in Contracts.all) {
                 Card(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1A14))
+                    colors = gameCardColors()
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
                         Text(stringResource(contractNameRes(contract.id)))
                         Text(
                             text = stringResource(R.string.contract_reward),
                             style = MaterialTheme.typography.bodyMedium,
-                            color = Color(0xFFA99B7E)
+                            color = GameColors.muted
                         )
                     }
                 }
@@ -101,7 +102,7 @@ fun QuestLogScreen(vm: GameViewModel, navController: NavController) {
 private fun QuestRow(questId: String, done: Boolean) {
     Card(
         modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1A14))
+        colors = gameCardColors()
     ) {
         Row(
             modifier = Modifier.padding(12.dp),
@@ -215,7 +216,7 @@ fun ForgeScreen(vm: GameViewModel, navController: NavController) {
                     val owned = vm.isSwordOwned(sword.id)
                     Card(
                         modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1A14))
+                        colors = gameCardColors()
                     ) {
                         Column(modifier = Modifier.padding(12.dp)) {
                             FramedImage(
@@ -364,7 +365,7 @@ fun ChestScreen(vm: GameViewModel, navController: NavController) {
                 val equipped = save.equippedSword == sword.id
                 Card(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1A14))
+                    colors = gameCardColors()
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
                         FramedImage(
@@ -399,7 +400,7 @@ fun ChestScreen(vm: GameViewModel, navController: NavController) {
                     save.unlockedRegion <= armor.requiredRegionCleared
                 Card(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1A14))
+                    colors = gameCardColors()
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
                         FramedImage(
@@ -438,7 +439,7 @@ fun ChestScreen(vm: GameViewModel, navController: NavController) {
                     save.unlockedRegion <= amulet.requiredRegionCleared
                 Card(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF1E1A14))
+                    colors = gameCardColors()
                 ) {
                     Column(modifier = Modifier.padding(12.dp)) {
                         FramedImage(
@@ -565,7 +566,7 @@ fun SettingsScreen(vm: GameViewModel, navController: NavController) {
                     Text(
                         text = stringResource(R.string.settings_haptics_desc),
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color(0xFFA99B7E)
+                        color = GameColors.muted
                     )
                 }
                 Switch(checked = haptics, onCheckedChange = { vm.setHaptics(it) })
@@ -575,7 +576,7 @@ fun SettingsScreen(vm: GameViewModel, navController: NavController) {
             Text(
                 text = stringResource(R.string.settings_reset_desc),
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color(0xFFA99B7E)
+                color = GameColors.muted
             )
             Spacer(modifier = Modifier.height(8.dp))
             Button(

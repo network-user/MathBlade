@@ -432,7 +432,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         if (correct) {
             val boss = bossBattle
             val previousPhase = boss?.phase ?: 1
-            val schoolBonus = sword.typeBonusFor(problem.operation)
+            val schoolBonus = problem.operation.damageCoefficient() * sword.typeBonusFor(problem.operation)
             val breakdown = battleState?.answerCorrect(problem, effectiveElapsed, schoolBonus, strikeDifficulty)
                 ?: boss?.answerCorrect(problem, effectiveElapsed, schoolBonus, strikeDifficulty)
                 ?: return false
