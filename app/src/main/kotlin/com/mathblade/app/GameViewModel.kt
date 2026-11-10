@@ -18,6 +18,7 @@ import com.mathblade.core.BattleState
 import com.mathblade.core.BossBattle
 import com.mathblade.core.CombatAnimationState
 import com.mathblade.core.DamageBreakdown
+import com.mathblade.core.Difficulty
 import com.mathblade.core.Economy
 import com.mathblade.core.Equipment
 import com.mathblade.core.Forge
@@ -93,7 +94,9 @@ data class BattleSnapshot(
     val hintUsed: Boolean,
     val hintDigit: Int?,
     val animation: CombatAnimationState,
-    val runDamage: Long
+    val runDamage: Long,
+    val strikeDifficulty: Difficulty,
+    val strikeOperation: Operation
 )
 
 sealed interface RunResult {
@@ -185,6 +188,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private var battleRegion: RegionDef? = null
     private var monsterIndex = 0
     private var currentProblem: MathProblem? = null
+    private var strikeDifficulty: Difficulty = Difficulty.EASY
+    private var strikeOperation: Operation = Operation.ADD
     private var problemShownAtMs = 0L
     private var feedback: BattleFeedback? = null
     private var fallen: FallenInfo? = null
@@ -375,23 +380,36 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 initialLives = livesCarried
             )
         }
-        nextProblem()
+        strikeOperation = monster.operation
+        strikeDifficulty = region.difficulty
+        currentProblem = null
         emitBattle()
     }
 
-    private fun nextProblem() {
-        val boss = bossBattle
-        val problem = if (boss != null) {
-            ProblemGenerator.generateMixed(boss.currentDifficulty, boss.operationsForCurrentPhase(), rng)
-        } else {
-            val region = battleRegion ?: return
-            val monster = queue.getOrNull(monsterIndex) ?: return
-            ProblemGenerator.generate(region.difficulty, monster.operation, rng)
-        }
-        currentProblem = problem
+    /** Player picks the strike before a problem exists. */
+    fun selectStrike(difficulty: Difficulty, operation: Operation) {
+        if (currentProblem != null || fallen != null) return
+        strikeDifficulty = difficulty
+        strikeOperation = operation
+        emitBattle()
+    }
+
+    /** Builds the example for the chosen school and difficulty. */
+    fun launchStrike() {
+        if (currentProblem != null || fallen != null) return
+        if (battleRegion == null) return
+        currentProblem = ProblemGenerator.generate(strikeDifficulty, strikeOperation, rng)
         problemShownAtMs = SystemClock.elapsedRealtime()
         feedback = null
         hintDigit = null
+        emitBattle()
+    }
+
+    /** Drop the current example and return to the strike picker. */
+    fun cancelStrike() {
+        if (currentProblem == null || feedback != null || fallen != null) return
+        currentProblem = null
+        emitBattle()
     }
 
     fun submitBattleAnswer(answerText: String?, quotientText: String?, remainderText: String?): Boolean {
@@ -414,8 +432,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         if (correct) {
             val boss = bossBattle
             val previousPhase = boss?.phase ?: 1
-            val breakdown = battleState?.answerCorrect(problem, effectiveElapsed, sword.typeBonusFor(problem.operation))
-                ?: boss?.answerCorrect(problem, effectiveElapsed, sword.typeBonusFor(problem.operation))
+            val schoolBonus = sword.typeBonusFor(problem.operation)
+            val breakdown = battleState?.answerCorrect(problem, effectiveElapsed, schoolBonus, strikeDifficulty)
+                ?: boss?.answerCorrect(problem, effectiveElapsed, schoolBonus, strikeDifficulty)
                 ?: return false
             runDamage += breakdown.total
             updateSave {
@@ -473,7 +492,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             }
             return
         }
-        nextProblem()
+        currentProblem = null
+        feedback = null
         emitBattle()
     }
 
@@ -576,7 +596,9 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
             hintUsed = hintUsed,
             hintDigit = hintDigit,
             animation = animation,
-            runDamage = runDamage
+            runDamage = runDamage,
+            strikeDifficulty = strikeDifficulty,
+            strikeOperation = strikeOperation
         )
     }
 

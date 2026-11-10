@@ -182,9 +182,14 @@ class BossBattle(
         return phaseDef?.mixedOperations ?: listOf(currentOperation)
     }
 
-    fun answerCorrect(problem: MathProblem, elapsedMs: Long, typeBonus: Double = 1.0): DamageBreakdown {
+    fun answerCorrect(
+        problem: MathProblem,
+        elapsedMs: Long,
+        typeBonus: Double = 1.0,
+        difficulty: Difficulty = currentDifficulty
+    ): DamageBreakdown {
         val breakdown = computeDamage(
-            currentDifficulty, elapsedMs, swordMultiplier, speedCap, typeBonus, preciseBonus
+            difficulty, elapsedMs, swordMultiplier, speedCap, typeBonus, preciseBonus
         )
         hp = (hp - breakdown.total).coerceAtLeast(0)
         if (isEnemyDead) {

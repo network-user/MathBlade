@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -117,6 +119,7 @@ fun AnswerFields(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun BattleScreen(vm: GameViewModel, navController: NavController, regionId: Int) {
     val snapshot by vm.battle.collectAsState()
@@ -174,6 +177,7 @@ fun BattleScreen(vm: GameViewModel, navController: NavController, regionId: Int)
             .fillMaxSize()
             .background(Ink)
             .imePadding()
+            .navigationBarsPadding()
     ) {
             Column(
                 modifier = Modifier
@@ -211,26 +215,22 @@ fun BattleScreen(vm: GameViewModel, navController: NavController, regionId: Int)
                 }
             }
 
-            PixelBackdrop(
-                place = pixelPlaceFor(regionBackgroundRes(regionId)),
+            BattleStage(
+                monsterId = snap.monster.id,
+                operation = snap.strikeOperation,
+                armorId = save.armorId,
+                swordId = save.equippedSword,
+                animation = displayAnimation,
+                showHit = snap.feedback is BattleFeedback.Correct,
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth()
-            ) {
-                BattleArena(
-                    monsterId = snap.monster.id,
-                    armorId = save.armorId,
-                    swordId = save.equippedSword,
-                    animation = displayAnimation,
-                    showHit = snap.feedback is BattleFeedback.Correct,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
+            )
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(max = 340.dp)
+                    .heightIn(max = 460.dp)
                     .background(Ink.copy(alpha = 0.92f))
                     .verticalScroll(rememberScrollState())
                     .padding(12.dp)
@@ -260,6 +260,60 @@ fun BattleScreen(vm: GameViewModel, navController: NavController, regionId: Int)
                         onClick = { vm.continueAfterFallen() },
                         modifier = Modifier.fillMaxWidth()
                     ) { Text(stringResource(R.string.battle_next_monster)) }
+                } else if (problem == null) {
+                    Text(stringResource(R.string.strike_hint), color = Muted)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(stringResource(R.string.strike_power), color = Paper, fontWeight = FontWeight.Bold)
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        StrikeChip(
+                            label = stringResource(R.string.strike_easy),
+                            selected = snap.strikeDifficulty == com.mathblade.core.Difficulty.EASY,
+                            onClick = { vm.selectStrike(com.mathblade.core.Difficulty.EASY, snap.strikeOperation) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        StrikeChip(
+                            label = stringResource(R.string.strike_medium),
+                            selected = snap.strikeDifficulty == com.mathblade.core.Difficulty.MEDIUM,
+                            onClick = { vm.selectStrike(com.mathblade.core.Difficulty.MEDIUM, snap.strikeOperation) },
+                            modifier = Modifier.weight(1f)
+                        )
+                        StrikeChip(
+                            label = stringResource(R.string.strike_hard),
+                            selected = snap.strikeDifficulty == com.mathblade.core.Difficulty.HARD,
+                            onClick = { vm.selectStrike(com.mathblade.core.Difficulty.HARD, snap.strikeOperation) },
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = stringResource(
+                            R.string.strike_preview,
+                            snap.strikeDifficulty.baseDamage,
+                            snap.strikeDifficulty.normSeconds
+                        ),
+                        color = Gold
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(stringResource(R.string.strike_school), color = Paper, fontWeight = FontWeight.Bold)
+                    Spacer(modifier = Modifier.height(6.dp))
+                    androidx.compose.foundation.layout.FlowRow(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp)
+                    ) {
+                        com.mathblade.core.Operation.entries.forEach { op ->
+                            StrikeChip(
+                                label = stringResource(operationNameRes(op)),
+                                selected = snap.strikeOperation == op,
+                                onClick = { vm.selectStrike(snap.strikeDifficulty, op) }
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Button(
+                        onClick = { vm.launchStrike() },
+                        modifier = Modifier.fillMaxWidth()
+                    ) { Text(stringResource(R.string.strike_launch)) }
                 } else if (problem != null) {
                     Text(
                         text = formatProblem(context, problem),
@@ -296,6 +350,11 @@ fun BattleScreen(vm: GameViewModel, navController: NavController, regionId: Int)
                         }
                         null -> Unit
                     }
+                    if (snap.feedback == null) {
+                        TextButton(onClick = { vm.cancelStrike() }) {
+                            Text(stringResource(R.string.strike_change), color = Gold)
+                        }
+                    }
                     Spacer(modifier = Modifier.height(8.dp))
                     AnswerFields(
                         problem = problem,
@@ -319,6 +378,25 @@ fun BattleScreen(vm: GameViewModel, navController: NavController, regionId: Int)
                     modifier = Modifier.fillMaxWidth()
                 ) { Text(stringResource(R.string.common_to_camp)) }
             }
+    }
+}
+
+@Composable
+private fun StrikeChip(
+    label: String,
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier,
+        colors = androidx.compose.material3.ButtonDefaults.buttonColors(
+            containerColor = if (selected) Gold else Color(0xFF2A241C),
+            contentColor = if (selected) Ink else Paper
+        )
+    ) {
+        Text(label)
     }
 }
 

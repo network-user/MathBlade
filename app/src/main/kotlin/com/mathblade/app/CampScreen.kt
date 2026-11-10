@@ -36,18 +36,16 @@ fun CampScreen(vm: GameViewModel, navController: NavController) {
     val currentQuest = vm.currentQuestId()
 
     Column(modifier = Modifier.fillMaxSize().background(Color(0xFF1A1420))) {
-        PixelBackdrop(
-            place = PixelPlace.CAMP,
+        GameAtmosphere(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(220.dp)
+                .height(230.dp)
         ) {
-            PixelHero(
+            KnightFigure(
                 armorId = save.armorId,
                 swordId = save.equippedSword,
                 attacking = false,
-                pixel = 8.dp,
-                modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 8.dp)
+                modifier = Modifier.align(Alignment.BottomCenter)
             )
         }
         Column(

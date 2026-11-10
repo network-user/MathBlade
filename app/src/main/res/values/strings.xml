@@ -290,4 +290,14 @@
     <string name="incompatible_title">Сохранение не подходит</string>
     <string name="incompatible_text">Сохранение повреждено или создано другой версией игры, поэтому его нельзя загрузить. Начните заново — прогресс будет чистым, а старое сохранение стёрто.</string>
     <string name="incompatible_start_new">Начать заново</string>
+
+    <string name="strike_power">Сила удара</string>
+    <string name="strike_school">Школа примера</string>
+    <string name="strike_launch">Замахнуться</string>
+    <string name="strike_easy">Лёгкий</string>
+    <string name="strike_medium">Средний</string>
+    <string name="strike_hard">Тяжёлый</string>
+    <string name="strike_preview">База урона %1$d, на ответ около %2$d с</string>
+    <string name="strike_change">Другой удар</string>
+    <string name="strike_hint">Сначала выбери силу и школу. Пример появится после замаха.</string>
 </resources>

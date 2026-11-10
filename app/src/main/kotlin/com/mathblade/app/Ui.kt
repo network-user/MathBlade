@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.sp
  */
 @Composable
 fun FullscreenBackground(imageRes: Int, content: @Composable () -> Unit) {
-    PixelBackdrop(pixelPlaceFor(imageRes), modifier = Modifier.fillMaxSize()) {
+    GameAtmosphere(modifier = Modifier.fillMaxSize()) {
         CompositionLocalProvider(LocalContentColor provides Color(0xFFF2EAD8)) {
             content()
         }

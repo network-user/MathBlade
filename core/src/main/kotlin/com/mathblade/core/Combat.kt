@@ -99,7 +99,12 @@ class BattleState(
     val isRunOver: Boolean get() = lives <= 0
     val isEnemyDead: Boolean get() = monsterHp <= 0
 
-    fun answerCorrect(problem: MathProblem, elapsedMs: Long, typeBonus: Double = 1.0): DamageBreakdown {
+    fun answerCorrect(
+        problem: MathProblem,
+        elapsedMs: Long,
+        typeBonus: Double = 1.0,
+        difficulty: Difficulty = this.difficulty
+    ): DamageBreakdown {
         val breakdown = computeDamage(
             difficulty, elapsedMs, swordMultiplier, speedCap, typeBonus, preciseBonus
         )
