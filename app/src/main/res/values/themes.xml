@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MathBlade" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">@color/mathblade_background</item>
+        <item name="colorPrimary">@color/mathblade_gold</item>
+    </style>
+</resources>

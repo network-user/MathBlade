@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Весь видимый текст игры — только здесь, по-русски.
+  В :core русских фраз нет: имена мечей, монстров, квестов и титулов
+  привязаны к стабильным id из :core (sword_rusty, monster_slime_add,
+  title_apprentice и т. д.).
+-->
+<resources>
+    <string name="app_name">Клинок счёта</string>
+
+    <!-- Общие -->
+    <string name="common_back">Назад</string>
+    <string name="common_cancel">Отмена</string>
+    <string name="common_close">Закрыть</string>
+    <string name="common_continue">Продолжить</string>
+    <string name="common_to_camp">В лагерь</string>
+    <string name="common_next">Дальше</string>
+    <string name="common_start">Начать</string>
+    <string name="common_ok">Понятно</string>
+    <string name="common_yes">Да</string>
+    <string name="common_no">Нет</string>
+    <string name="common_loading">Загрузка…</string>
+    <string name="common_gold">Золото: %1$d</string>
+    <string name="common_xp">Опыт: %1$d</string>
+    <string name="common_level_short">Ур. %1$d</string>
+    <string name="heart_symbol">♥</string>
+    <string name="notice_not_enough_gold">Не хватает золота</string>
+    <string name="notice_bought">Куплено</string>
+    <string name="notice_equipped">Надето</string>
+    <string name="notice_saved">Сохранено</string>
+
+    <!-- Лагерь -->
+    <string name="camp_title">Лагерь</string>
+    <string name="camp_hero_title">Титул: %1$s</string>
+    <string name="camp_gold_label">Золото</string>
+    <string name="camp_xp_label">Опыт</string>
+    <string name="camp_current_quest">Текущий квест</string>
+    <string name="camp_no_quest">Все квесты выполнены</string>
+    <string name="camp_regions">Регионы</string>
+    <string name="camp_region_locked">Закрыто</string>
+    <string name="camp_region_open">Открыто</string>
+    <string name="camp_region_boss">Босс: %1$s</string>
+    <string name="camp_gate">Врата</string>
+    <string name="camp_gate_desc">Бой с монстрами региона</string>
+    <string name="camp_forge">Кузница</string>
+    <string name="camp_forge_desc">Закалка меча: пять верных примеров</string>
+    <string name="camp_board">Доска объявлений</string>
+    <string name="camp_board_desc">Квесты, поручения и контракты</string>
+    <string name="camp_chest">Сундук героя</string>
+    <string name="camp_chest_desc">Меч, доспех и амулеты</string>
+    <string name="camp_hall">Палата славы</string>
+    <string name="camp_hall_desc">Лучшие забеги и турнир недели</string>
+    <string name="camp_daily">Челлендж дня</string>
+    <string name="camp_daily_desc">Десять примеров, одна попытка в день</string>
+    <string name="camp_settings">Настройки</string>
+    <string name="camp_settings_desc">Тактильный отклик и сброс сохранения</string>
+    <string name="camp_choose_region">Выберите регион</string>
+
+    <!-- Регионы -->
+    <string name="region_outskirts">Окраина счёта</string>
+    <string name="region_trade_route">Торговый тракт</string>
+    <string name="region_remainder_tower">Башня остатка</string>
+    <string name="region_power_ruins">Руины степеней</string>
+    <string name="region_throne_hall">Тронный зал</string>
+
+    <!-- Сложность -->
+    <string name="difficulty_easy">Лёгкая</string>
+    <string name="difficulty_medium">Средняя</string>
+    <string name="difficulty_hard">Сложная</string>
+
+    <!-- Школы (операции) -->
+    <string name="operation_add">Сложение</string>
+    <string name="operation_sub">Вычитание</string>
+    <string name="operation_mul">Умножение</string>
+    <string name="operation_div">Деление</string>
+    <string name="operation_remainder">Деление с остатком</string>
+    <string name="operation_power">Степени</string>
+    <string name="operation_sqrt">Корни</string>
+    <string name="operation_percent">Проценты</string>
+    <string name="operation_combo">Связки</string>
+
+    <!-- Монстры -->
+    <string name="monster_slime_add">Слизень</string>
+    <string name="monster_wolf_sub">Волк</string>
+    <string name="monster_bat_mul">Летучая мышь</string>
+    <string name="monster_tax_div">Сборщик податей</string>
+    <string name="monster_usurer_pct">Ростовщик</string>
+    <string name="monster_golem_rem1">Голем остатка</string>
+    <string name="monster_golem_rem2">Голем остатка</string>
+    <string name="monster_griffin_pow">Грифон степеней</string>
+    <string name="monster_root_beast">Корневой зверь</string>
+    <string name="monster_scribe_combo">Писарь связок</string>
+    <string name="monster_ancient_slime">Древний слизень</string>
+    <string name="monster_caravan_master">Караванщик</string>
+    <string name="monster_remainder_keeper">Хранитель остатка</string>
+    <string name="monster_chronicler">Летописец</string>
+    <string name="monster_archchancellor">Архиканцлер</string>
+    <string name="monster_boss_label">Босс</string>
+    <string name="monster_unknown">Неизвестный враг</string>
+
+    <!-- Мечи -->
+    <string name="sword_rusty">Ржавый меч</string>
+    <string name="sword_rusty_desc">Старый клинок странствующего счетовода.</string>
+    <string name="sword_apprentice">Меч ученика</string>
+    <string name="sword_apprentice_desc">Лёгкий клинок, кованый в Окраине счёта.</string>
+    <string name="sword_caravan">Караванный меч</string>
+    <string name="sword_caravan_desc">Силен против умножения, деления и процентов.</string>
+    <string name="sword_remainder">Меч остатка</string>
+    <string name="sword_remainder_desc">Силен против деления с остатком.</string>
+    <string name="sword_archmage">Меч архимага</string>
+    <string name="sword_archmage_desc">Точный удар: +8 к урону при быстром ответе.</string>
+    <string name="sword_multiplier">Множитель: %1$s</string>
+    <string name="sword_not_owned">Ещё не добыт</string>
+    <string name="sword_obtained_region">Добывается в регионе %1$d</string>
+
+    <!-- Доспехи -->
+    <string name="armor_canvas">Холщовая куртка</string>
+    <string name="armor_canvas_desc">Три жизни. Выдана в начале пути.</string>
+    <string name="armor_leather">Кожаный доспех</string>
+    <string name="armor_leather_desc">Четыре жизни.</string>
+    <string name="armor_chainmail">Кольчуга</string>
+    <string name="armor_chainmail_desc">Пять жизней.</string>
+    <string name="armor_lives">Жизней: %1$d</string>
+
+    <!-- Амулеты -->
+    <string name="amulet_beads">Чётки</string>
+    <string name="amulet_beads_desc">Раз за бой показывают последнюю цифру ответа.</string>
+    <string name="amulet_hourglass">Песочные часы</string>
+    <string name="amulet_hourglass_desc">Норма времени больше в 1,25 раза.</string>
+    <string name="amulet_none">Без амулета</string>
+
+    <!-- Титулы -->
+    <string name="title_apprentice">Ученик</string>
+    <string name="title_squire">Оруженосец</string>
+    <string name="title_knight">Рыцарь</string>
+    <string name="title_master">Мастер</string>
+    <string name="title_archmage">Архимаг</string>
+
+    <!-- Квесты -->
+    <string name="quest_main_region_1">Очистить Окраину счёта</string>
+    <string name="quest_main_region_2">Очистить Торговый тракт</string>
+    <string name="quest_main_region_3">Очистить Башню остатка</string>
+    <string name="quest_main_region_4">Очистить Руины степеней</string>
+    <string name="quest_main_region_5">Победить Архиканцлера</string>
+    <string name="quest_forge_level1">Закалить меч до 1-го уровня</string>
+    <string name="quest_herald_daily">Пройти челлендж дня</string>
+    <string name="quest_treasurer_500">Накопить 500 золота</string>
+    <string name="quest_mentor_region2_flawless">Пройти Торговый тракт без ошибок</string>
+    <string name="quest_log_title">Журнал квестов</string>
+    <string name="quest_main_title">Главные квесты</string>
+    <string name="quest_side_title">Побочные квесты</string>
+    <string name="quest_done">Выполнено</string>
+    <string name="quest_active">Активно</string>
+    <string name="quest_contracts_title">Контракты</string>
+    <string name="contract_streak15">Серия из 15 верных ответов подряд</string>
+    <string name="contract_fast10easy">10 лёгких примеров быстрее чем за 90 секунд</string>
+    <string name="contract_duel_boss">Победить босса, начав бой с одной жизнью</string>
+    <string name="contract_reward">Награда: 150 золота</string>
+
+    <!-- Поручения дня -->
+    <string name="errand_defeat_school">Победить монстра школы дня</string>
+    <string name="errand_solve_10">Решить 10 примеров</string>
+    <string name="errand_flawless_battle">Выиграть бой без ошибок</string>
+    <string name="errand_upgrade_sword">Улучшить меч в кузнице</string>
+    <string name="errand_finish_daily">Завершить челлендж дня</string>
+
+    <!-- Примеры: текст собирает :app из чисел и операции -->
+    <string name="problem_add">%1$d + %2$d = ?</string>
+    <string name="problem_sub">%1$d − %2$d = ?</string>
+    <string name="problem_mul">%1$d × %2$d = ?</string>
+    <string name="problem_div">%1$d ÷ %2$d = ?</string>
+    <string name="problem_remainder">%1$d ÷ %2$d = ?</string>
+    <string name="problem_remainder_hint">Частное и остаток — два поля</string>
+    <string name="problem_power2">%1$d² = ?</string>
+    <string name="problem_power3">%1$d³ = ?</string>
+    <string name="problem_sqrt">√%1$d = ?</string>
+    <string name="problem_percent">%2$d%% от %1$d = ?</string>
+    <string name="problem_combo_add">(%1$d + %2$d) × %3$d = ?</string>
+    <string name="problem_combo_sub">(%1$d − %2$d) × %3$d = ?</string>
+
+    <!-- Бой -->
+    <string name="battle_title">Бой</string>
+    <string name="battle_enemy_hp">%1$d / %2$d</string>
+    <string name="battle_hero_lives">Жизни героя</string>
+    <string name="battle_answer_label">Ваш ответ</string>
+    <string name="battle_quotient_label">Частное</string>
+    <string name="battle_remainder_label">Остаток</string>
+    <string name="battle_answer_button">Ответить</string>
+    <string name="battle_correct">Верно!</string>
+    <string name="battle_wrong">Неверно — минус жизнь</string>
+    <string name="battle_life_lost">Жизнь потеряна</string>
+    <string name="battle_damage_dealt">Урон: %1$d</string>
+    <string name="battle_hint_button">Подсказка</string>
+    <string name="battle_hint_text">Последняя цифра ответа: %1$d</string>
+    <string name="battle_hint_used">Подсказка уже использована в этом бою</string>
+    <string name="battle_fallen_title">%1$s пал!</string>
+    <string name="battle_fallen_reward">Золото +%1$d, опыт +%2$d</string>
+    <string name="battle_next_monster">Следующий монстр</string>
+    <string name="battle_boss_phase">Фаза %1$d</string>
+    <string name="battle_phase_changed">Босс сменил школу!</string>
+    <string name="battle_monster_counter">Монстр %1$d из %2$d</string>
+    <string name="battle_school_label">Школа: %1$s</string>
+    <string name="battle_difficulty_label">Сложность: %1$s</string>
+    <string name="battle_exit_title">Покинуть бой?</string>
+    <string name="battle_exit_text">Текущий монстр не засчитается, но золото и опыт за уже поверженных монстров сохранятся.</string>
+    <string name="battle_exit_confirm">Покинуть</string>
+    <string name="battle_exit_stay">Остаться</string>
+    <string name="battle_empty_answer">Введите ответ</string>
+
+    <!-- Смерть и победа -->
+    <string name="death_title">Забег окончен</string>
+    <string name="death_text">Герой пал в бою. Золото и опыт за поверженных монстров сохранены, снаряжение не пропало.</string>
+    <string name="death_run_damage">Урон за забег: %1$d</string>
+    <string name="victory_title">Босс повержен!</string>
+    <string name="victory_text">Регион очищен. Открыт следующий регион, а подвиг записан в Палату славы.</string>
+    <string name="victory_reward">Награда: золото +%1$d, опыт +%2$d</string>
+    <string name="victory_run_damage">Урон за забег: %1$d</string>
+    <string name="victory_region_unlocked">Открыт регион: %1$s</string>
+    <string name="victory_last_region">Все регионы пройдены. Архиканцлер повержен!</string>
+
+    <!-- Челлендж дня -->
+    <string name="daily_title">Челлендж дня</string>
+    <string name="daily_desc">Десять примеров. Одна попытка в день. Жизни бесконечны, счёт не зависит от меча.</string>
+    <string name="daily_start">Начать челлендж</string>
+    <string name="daily_already_done">Попытка на сегодня уже потрачена. Возвращайтесь завтра.</string>
+    <string name="daily_progress">Пример %1$d из 10</string>
+    <string name="daily_score">Счёт: %1$d</string>
+    <string name="daily_finished_title">Челлендж пройден!</string>
+    <string name="daily_finished_text">Итоговый счёт: %1$d. Награда: золото +100, опыт +50.</string>
+    <string name="daily_errands_title">Поручения дня</string>
+    <string name="daily_difficulty_label">Сложность не выше открытой: %1$s</string>
+
+    <!-- Кузница -->
+    <string name="forge_title">Кузница</string>
+    <string name="forge_desc">Пять верных примеров школы меча — и уровень вырастет. Три ошибки отменяют попытку, золото списывается только при успехе.</string>
+    <string name="forge_choose_sword">Выберите меч</string>
+    <string name="forge_level">Уровень %1$d из 5</string>
+    <string name="forge_price">Цена: %1$d золота</string>
+    <string name="forge_max_level">Максимальный уровень</string>
+    <string name="forge_start">Начать закалку</string>
+    <string name="forge_need_correct">Верных: %1$d из 5</string>
+    <string name="forge_wrong">Ошибок: %1$d из 3</string>
+    <string name="forge_success">Меч закалён! Новый уровень: %1$d.</string>
+    <string name="forge_failed">Закалка не удалась. Попытка отменена, золото не списано.</string>
+    <string name="forge_cancel">Отменить попытку</string>
+    <string name="forge_school">Школа меча: %1$s</string>
+
+    <!-- Сундук героя -->
+    <string name="chest_title">Сундук героя</string>
+    <string name="chest_sword_slot">Меч</string>
+    <string name="chest_armor_slot">Доспех</string>
+    <string name="chest_amulet_slot">Амулет</string>
+    <string name="chest_buy">Купить: %1$d золота</string>
+    <string name="chest_equip">Надеть</string>
+    <string name="chest_equipped">Надето</string>
+    <string name="chest_owned">Куплено</string>
+    <string name="chest_locked_region">Откроется после очистки региона %1$d</string>
+    <string name="chest_record_title">Сундук рекорда</string>
+    <string name="chest_record_text">Награда 300 золота за первый записанный забег в Палате славы.</string>
+    <string name="chest_record_claim">Забрать 300 золота</string>
+    <string name="chest_record_claimed">Награда уже забрана</string>
+    <string name="chest_record_empty">Сначала завершите забег: победите монстра или босса.</string>
+
+    <!-- Палата славы -->
+    <string name="hall_title">Палата славы</string>
+    <string name="hall_top_runs">Лучшие забеги</string>
+    <string name="hall_run_item">Урон %1$d · %2$s · %3$s</string>
+    <string name="hall_empty_title">Здесь пока пусто</string>
+    <string name="hall_empty_text">Палата славы заполняется забегами: идите через Врата, побеждайте монстров и боссов — каждый завершённый забег записывается сюда, а десять лучших останутся навсегда. За первый записанный забег Сундук героя выдаёт 300 золота.</string>
+    <string name="hall_best_daily">Лучший дневной счёт за 7 дней: %1$d</string>
+    <string name="hall_best_daily_none">Дневной счёт за 7 дней: пока нет</string>
+    <string name="hall_weekly">Турнир недели</string>
+    <string name="hall_weekly_best">Лучший урон недели: %1$d</string>
+    <string name="hall_weekly_yours">Ваш рекорд недели: %1$d</string>
+    <string name="hall_weekly_none">На этой неделе забегов пока не было</string>
+    <string name="hall_total_damage">Суммарный урон: %1$d</string>
+
+    <!-- Настройки -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_haptics">Тактильный отклик</string>
+    <string name="settings_haptics_desc">Вибрация при верном ударе и при ошибке</string>
+    <string name="settings_reset">Сбросить сохранение</string>
+    <string name="settings_reset_desc">Стереть золото, опыт, снаряжение и все рекорды</string>
+    <string name="settings_reset_title">Сбросить сохранение?</string>
+    <string name="settings_reset_text">Всё будет стёрто: золото, опыт, мечи, доспехи, амулеты, квесты и Палата славы. Это действие нельзя отменить.</string>
+    <string name="settings_reset_confirm">Сбросить</string>
+    <string name="settings_reset_done">Сохранение сброшено</string>
+
+    <!-- Несовместимое сохранение -->
+    <string name="incompatible_title">Сохранение не подходит</string>
+    <string name="incompatible_text">Сохранение повреждено или создано другой версией игры, поэтому его нельзя загрузить. Начните заново — прогресс будет чистым, а старое сохранение стёрто.</string>
+    <string name="incompatible_start_new">Начать заново</string>
+</resources>
